@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lean Six Sigma Project - Audit Calibration Improvement</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --color-darkest: #170312;
+      --color-dark: #33032F;
+      --color-accent: #531253;
+      --color-light: #A0ACAD;
+      --color-accent-light: #97D8B2;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Quicksand', sans-serif;
+      color: var(--color-darkest);
+      line-height: 1.7;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+      overflow-x: hidden;
+      padding: 1em 0;
+    }
+
+    header {
+      max-width: 900px;
+      margin: 0 auto 2em auto;
+      padding: 3em 3.5em 3.5em 3.5em;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(83, 18, 83, 0.2), 
+                  0 16px 64px rgba(83, 18, 83, 0.15);
+      text-align: center;
+      color: var(--color-accent);
+      font-weight: 900;
+      font-size: 1.1em;
+      letter-spacing: 0.1em;
+      background: linear-gradient(135deg, #ffffff 60%, var(--color-accent-light) 100%);
+      user-select: none;
+      transform: translateY(0);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    header:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(83, 18, 83, 0.25), 
+                  0 20px 72px rgba(83, 18, 83, 0.18);
+    }
+
+    header h1 {
+      font-size: 3.4em;
+      margin: 0 0 0.25em 0;
+      color: var(--color-dark);
+    }
+
+    header h2 {
+      font-size: 2.2em;
+      font-weight: 800;
+      margin: 0 0 0.75em 0;
+      color: var(--color-darkest);
+      text-shadow: 1px 0 5px rgba(148, 216, 178, 0.4);
+    }
+
+    header p {
+      margin: 0.4em 0;
+      font-size: 1.3em;
+      color: var(--color-dark);
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-shadow: 0 0 2px var(--color-accent-light);
+    }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto 3em auto;
+      padding: 0 3em;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5em;
+    }
+
+    section {
+      padding: 2.2em 3em 3em 3em;
+      border-radius: 16px;
+      box-shadow: 0 6px 24px rgba(83, 18, 83, 0.12), 
+                  0 12px 48px rgba(83, 18, 83, 0.08);
+      color: var(--color-dark);
+      font-weight: 600;
+      font-size: 1.15em;
+      letter-spacing: 0.045em;
+      opacity: 0;
+      transform: translateY(60px) scale(0.96);
+      transition: opacity 0.8s cubic-bezier(0.22, 0.61, 0.36, 1), 
+                  transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1),
+                  box-shadow 0.3s ease;
+      background-color: #FFF;
+    }
+
+    section:hover {
+      box-shadow: 0 8px 32px rgba(83, 18, 83, 0.16), 
+                  0 16px 64px rgba(83, 18, 83, 0.12);
+      transform: translateY(-2px) scale(1);
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+
+    h2 {
+      color: var(--color-accent);
+      font-weight: 900;
+      font-size: 2.3em;
+      margin-bottom: 0.6em;
+      letter-spacing: 0.05em;
+    }
+
+    p {
+      margin-bottom: 1.4em;
+      line-height: 1.6;
+      color: var(--color-dark);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 1.1em;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--color-dark);
+      margin-top: 1.8em;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(83, 18, 83, 0.15), 
+                  0 16px 64px rgba(83, 18, 83, 0.1);
+      opacity: 0;
+      transform: translateY(60px) scale(0.96);
+      transition: opacity 0.8s cubic-bezier(0.22,0.61,0.36,1),
+                  transform 0.8s cubic-bezier(0.22,0.61,0.36,1),
+                  box-shadow 0.3s ease;
+      background-color: #FFF;
+    }
+
+    table:hover {
+      box-shadow: 0 12px 40px rgba(83, 18, 83, 0.2), 
+                  0 20px 72px rgba(83, 18, 83, 0.15);
+    }
+
+    table.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+
+    th, td {
+      padding: 18px 24px;
+      text-align: left;
+    }
+
+    tr:not(:last-child) td {
+      border-bottom: 1px solid rgba(160, 172, 173, 0.15);
+    }
+
+    th {
+      background-color: var(--color-accent-light);
+      color: var(--color-darkest);
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      box-shadow: 0 2px 8px rgba(83, 18, 83, 0.08);
+    }
+
+    tbody tr {
+      transition: background-color 0.2s ease;
+    }
+
+    tbody tr:hover {
+      background-color: rgba(151, 216, 178, 0.08);
+    }
+
+    footer {
+      max-width: 900px;
+      margin: 0 auto 2em auto;
+      padding: 1.8em 1em;
+      text-align: center;
+      color: var(--color-accent);
+      font-weight: 700;
+      font-size: 1.1em;
+      letter-spacing: 0.1em;
+      user-select: none;
+    }
+
+    @media (max-width: 700px) {
+      header, main, footer {
+        padding-left: 1.2em;
+        padding-right: 1.2em;
+      }
+      header h1 {
+        font-size: 2.8em;
+      }
+      header h2 {
+        font-size: 1.7em;
+      }
+      section {
+        font-size: 1.03em;
+        padding: 1.8em 2em 2em 2em;
+      }
+      table {
+        font-size: 1em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Lean Six Sigma Project</h1>
+  <h2>Audit Calibration Improvement Initiative</h2>
+  <p><strong>Department:</strong> Quality Assurance</p>
+  <p><strong>Prepared By:</strong> Kumar Raman <span>(Role: Project Lead)</span></p>
+  <p><strong>Duration:</strong> September 2024 - November 2024</p>
+</header>
+
+<main>
+  <section>
+    <h2>Executive Summary</h2>
+    <p>This Lean Six Sigma DMAIC project successfully addressed persistent audit calibration mismatches in Revenue Cycle Management AR workflows. Key achievements include a 6% improvement in calibration agreement (from 90% to 96%), a 65% reduction in monthly disputes (from 20 to 7), and a 60% improvement in feedback turnaround time (6.5 to 2.6 days), delivering an impressive annual ROI of 700%.</p>
+  </section>
+
+  <section>
+    <h2>Define Phase</h2>
+    <p>Outlined project goals focusing on reducing calibration variance between QA and Operations teams in AR workflows. Defined scope, key stakeholders, and project charter using DMAIC methodology.</p>
+  </section>
+
+  <section>
+    <h2>Measure Phase</h2>
+    <p>Collected data on current calibration mismatches, disputes, and time metrics. Established baseline metrics and measurement system analysis for improved data accuracy.</p>
+  </section>
+
+  <section>
+    <h2>Analyze Phase</h2>
+    <p>Identified root causes contributing to calibration mismatch including inconsistent audit guidelines adherence, feedback delays, and communication gaps.</p>
+  </section>
+
+  <section>
+    <h2>Improve Phase</h2>
+    <p>Implemented standardized audit calibration protocols, enhanced feedback communication channels, and trained staff leading to significant performance gains.</p>
+  </section>
+
+  <section>
+    <h2>Control Phase</h2>
+    <p>Established control charts and ongoing performance monitoring routines to sustain improvements and promptly address deviations.</p>
+  </section>
+
+  <section>
+    <h2>Results and Conclusion</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Before Improvement</th>
+          <th>After Improvement</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Calibration Agreement</td>
+          <td>90%</td>
+          <td>96%</td>
+        </tr>
+        <tr>
+          <td>Monthly Disputes</td>
+          <td>20</td>
+          <td>7</td>
+        </tr>
+        <tr>
+          <td>Feedback Turnaround (days)</td>
+          <td>6.5</td>
+          <td>2.6</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>The project demonstrated clear success in reducing audit calibration variance, improving dispute resolution, and accelerating feedback times, resulting in elevated process performance and stakeholder satisfaction.</p>
+  </section>
+</main>
+
+<footer>
+  © 2025 Kumar Raman. All rights reserved.
+</footer>
+
+<script>
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.3
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting) {
+        entry.target.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+        entry.target.style.opacity = 1;
+        entry.target.style.transform = 'translateY(0) scale(1.05)';
+      } else {
+        entry.target.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+        entry.target.style.opacity = 0;
+        entry.target.style.transform = 'translateY(60px) scale(0.96)';
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('section, table').forEach(elem => observer.observe(elem));
+</script>
+
+</body>
+</html>
