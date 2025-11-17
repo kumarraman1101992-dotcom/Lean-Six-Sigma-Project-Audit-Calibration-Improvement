@@ -14,6 +14,7 @@
       --color-accent-light: #34d399;
       --color-accent-secondary: #f59e0b;
       --color-bg: #fefefe;
+      --tab-bg: rgba(255,255,255,0.80);
     }
 
     * {
@@ -27,78 +28,54 @@
       line-height: 1.7;
       font-weight: 600;
       letter-spacing: 0.04em;
-      background: linear-gradient(135deg, #f0f9ff 0%, #e0e7ff 50%, #fae8ff 100%);
       overflow-x: hidden;
       padding: 1em 0;
       position: relative;
+      min-height: 100vh;
+      /* Remove old gradients, use only image bg */
+      background: url('17ab0f53-b471-46c2-bef1-58d033640a1d.jpg') no-repeat center center fixed;
+      background-size: cover;
+      background-attachment: fixed;
     }
 
-    /* Abstract Background */
+    /* Slight translucent overlay for entire page */
     body::before {
-      content: '';
+      content: "";
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: 
-        radial-gradient(circle at 20% 30%, rgba(124, 58, 237, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 80% 70%, rgba(52, 211, 153, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.06) 0%, transparent 50%),
-        linear-gradient(135deg, transparent 0%, rgba(167, 139, 250, 0.03) 100%);
-      pointer-events: none;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(255,255,255,0.30);
+      backdrop-filter: blur(1px);
       z-index: 0;
+      pointer-events: none;
     }
 
-    /* Floating shapes */
-    body::after {
-      content: '';
-      position: fixed;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background-image: 
-        radial-gradient(circle, rgba(124, 58, 237, 0.04) 1px, transparent 1px),
-        radial-gradient(circle, rgba(52, 211, 153, 0.04) 1px, transparent 1px);
-      background-size: 50px 50px, 80px 80px;
-      background-position: 0 0, 40px 40px;
-      animation: floatBackground 20s linear infinite;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    @keyframes floatBackground {
-      from { transform: translate(0, 0); }
-      to { transform: translate(50px, 50px); }
+    header, section, .table-wrapper, footer {
+      position: relative;
+      z-index: 1;
+      background: var(--tab-bg);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px 0 rgba(60, 40, 100, 0.28), 0 2px 6px rgba(124, 58, 237, 0.11);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(124, 58, 237, 0.07);
+      transition: box-shadow 0.3s ease, transform 0.3s;
     }
 
     header {
       max-width: 900px;
       margin: 0 auto 2em auto;
       padding: 2.5em 2em;
-      border-radius: 20px;
-      box-shadow: 0 10px 40px rgba(124, 58, 237, 0.2), 
-                  0 20px 80px rgba(124, 58, 237, 0.1);
       text-align: center;
       color: var(--color-accent);
       font-weight: 900;
       font-size: 1.1em;
       letter-spacing: 0.1em;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(250, 245, 255, 0.95) 100%);
-      backdrop-filter: blur(10px);
-      border: 2px solid rgba(124, 58, 237, 0.1);
       user-select: none;
       transform: translateY(0);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      position: relative;
-      z-index: 1;
     }
 
     header:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 15px 50px rgba(124, 58, 237, 0.25), 
-                  0 25px 90px rgba(124, 58, 237, 0.15);
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 0 15px 50px rgba(124, 58, 237, 0.30), 0 25px 90px rgba(124, 58, 237, 0.18);
     }
 
     header h1 {
@@ -116,7 +93,6 @@
       margin: 0 0 0.75em 0;
       color: var(--color-darkest);
     }
-
     header p {
       margin: 0.4em 0;
       font-size: clamp(1em, 2vw, 1.2em);
@@ -139,31 +115,28 @@
     section {
       padding: 2em 2em 2.5em 2em;
       border-radius: 18px;
-      box-shadow: 0 8px 30px rgba(124, 58, 237, 0.12), 
-                  0 15px 60px rgba(124, 58, 237, 0.08);
+      box-shadow: 0 8px 32px 0 rgba(60,40,100,0.13), 0 15px 60px rgba(124,58,237,0.08);
       color: var(--color-dark);
       font-weight: 600;
-      font-size: clamp(1em, 2vw, 1.1em);
+      font-size: clamp(1em, 2vw, 1.15em); /* slightly larger for contrast */
       letter-spacing: 0.045em;
       opacity: 0;
       transform: translateY(60px) scale(0.96);
       transition: opacity 0.8s cubic-bezier(0.22, 0.61, 0.36, 1), 
                   transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1),
                   box-shadow 0.3s ease;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(124, 58, 237, 0.08);
+      border: 1px solid rgba(124, 58, 237, 0.09);
     }
 
     section:hover {
-      box-shadow: 0 12px 40px rgba(124, 58, 237, 0.18), 
-                  0 20px 70px rgba(124, 58, 237, 0.12);
-      transform: translateY(-4px) scale(1);
+      box-shadow: 0 16px 53px rgba(124, 58, 237, 0.22), 
+                  0 25px 85px rgba(124, 58, 237, 0.14);
+      transform: translateY(-6px) scale(1.01);
     }
 
     section.visible {
       opacity: 1;
-      transform: translateY(0) scale(1);
+      transform: translateY(0) scale(1.02);
       transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
     }
 
@@ -187,33 +160,34 @@
     .table-wrapper {
       width: 100%;
       overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
       border-radius: 16px;
-      box-shadow: 0 10px 35px rgba(124, 58, 237, 0.15), 
-                  0 18px 70px rgba(124, 58, 237, 0.1);
+      box-shadow: 0 10px 35px rgba(124, 58, 237, 0.17), 
+                  0 18px 70px rgba(124, 58, 237, 0.13);
       opacity: 0;
       transform: translateY(60px) scale(0.96);
       transition: opacity 0.8s cubic-bezier(0.22,0.61,0.36,1),
                   transform 0.8s cubic-bezier(0.22,0.61,0.36,1),
                   box-shadow 0.3s ease;
       margin-top: 1.8em;
+      background: var(--tab-bg);
+      backdrop-filter: blur(7px);
     }
 
     .table-wrapper:hover {
-      box-shadow: 0 15px 45px rgba(124, 58, 237, 0.2), 
-                  0 25px 85px rgba(124, 58, 237, 0.15);
+      box-shadow: 0 15px 45px rgba(124, 58, 237, 0.23), 
+                  0 25px 85px rgba(124, 58, 237, 0.17);
     }
 
     .table-wrapper.visible {
       opacity: 1;
-      transform: translateY(0) scale(1);
+      transform: translateY(0) scale(1.01);
       transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      font-size: clamp(0.9em, 2vw, 1.05em);
+      font-size: clamp(0.98em, 2vw, 1.1em);
       font-weight: 700;
       letter-spacing: 0.05em;
       color: var(--color-dark);
@@ -249,7 +223,7 @@
     }
 
     tbody tr:hover {
-      background-color: rgba(124, 58, 237, 0.05);
+      background-color: rgba(124, 58, 237, 0.09);
       transform: scale(1.01);
     }
 
@@ -260,11 +234,13 @@
       text-align: center;
       color: var(--color-accent);
       font-weight: 700;
-      font-size: clamp(0.95em, 2vw, 1.05em);
+      font-size: clamp(0.95em, 2vw, 1.08em);
       letter-spacing: 0.1em;
       user-select: none;
-      position: relative;
-      z-index: 1;
+      border-radius: 14px;
+      background: var(--tab-bg);
+      box-shadow: 0 4px 20px rgba(124, 58, 237, 0.14);
+      backdrop-filter: blur(8px);
     }
 
     /* Mobile responsiveness */
@@ -290,7 +266,7 @@
       }
 
       table {
-        font-size: 0.85em;
+        font-size: 0.9em;
       }
 
       th, td {
@@ -300,6 +276,7 @@
       footer {
         margin: 0 0.5em 1em 0.5em;
         padding: 1.2em 0.8em;
+        border-radius: 10px;
       }
     }
 
@@ -314,7 +291,7 @@
       }
 
       table {
-        font-size: 0.8em;
+        font-size: 0.85em;
         margin-top: 1.2em;
       }
 
@@ -325,7 +302,6 @@
   </style>
 </head>
 <body>
-
 <header>
   <h1>Lean Six Sigma Project</h1>
   <h2>Audit Calibration Improvement Initiative</h2>
@@ -404,6 +380,7 @@
 </footer>
 
 <script>
+  // Bidirectional section reveal/scroll animation
   const observerOptions = {
     root: null,
     rootMargin: '0px',
@@ -413,19 +390,14 @@
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if(entry.isIntersecting) {
-        entry.target.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-        entry.target.style.opacity = 1;
-        entry.target.style.transform = 'translateY(0) scale(1.05)';
+        entry.target.classList.add('visible');
       } else {
-        entry.target.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-        entry.target.style.opacity = 0;
-        entry.target.style.transform = 'translateY(60px) scale(0.96)';
+        entry.target.classList.remove('visible');
       }
     });
   }, observerOptions);
 
   document.querySelectorAll('section, .table-wrapper').forEach(elem => observer.observe(elem));
 </script>
-
 </body>
 </html>
